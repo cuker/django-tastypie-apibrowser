@@ -1,0 +1,30 @@
+{% extends 'webcube/base.html' %}
+
+{% block extrahead %}
+    <script type="text/javascript" 
+            src="{{ STATIC_URL }}apibrowser/js/util/require.js">
+    </script>  
+
+    <link rel="stylesheet" 
+          href="{{STATIC_URL}}apibrowser/css/apibrowser.css"/>
+
+    <script type="text/javascript">
+        require.config({
+            paths: { "text": "{{ STATIC_URL }}apibrowser/js/text" } 
+        });
+        require(['{{ STATIC_URL }}apibrowser/js/util/underscore-min.js',
+                 '{{ STATIC_URL }}apibrowser/js/explorer.js',
+                 'text!{{ STATIC_URL }}apibrowser/jst/templates.jst',
+                 'text!{{ STATIC_URL }}apibrowser/css/apibrowser.css'], 
+                 function(underscore, explorer, html,css) {
+                    $("head").append(css);
+                    $("body").append(html);
+                    APIExplorer({element: "#api_explorer"});
+                 });
+    </script>
+    
+{% endblock %} 
+
+{% block content %}
+{{ flatpage.content }}
+{% endblock %}

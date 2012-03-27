@@ -1,0 +1,122 @@
+<script type="text/template" id="explorer-template">
+    <h1>API Browser</h1>
+    <hr/>
+    <div id="application-list">
+        <h3>Applications</h3>
+        <ul>
+        <% _.each(appkeys, function(v) { %>
+            <li><a href="#<%= applications[v] %>"><%= v %></a></li>
+        <% }); %>
+        </ul>
+    </div>
+
+    <div id="schema-display">
+        <h3>Models</h3>
+        <span>Please pick an application to view its model list.</span>
+    </div>
+
+    <div id="endpoint-panel">
+        <h3>Schema</h3>
+        <span>Please pick a model to view its fields and actions.</span>
+    </div>
+</script>
+
+<script type="text/template" id="schema-display-template">
+    <h3>Models</h3>
+    <ul>
+         <% _.each(models, function(v,k,l) { %>
+            <li><a href="#<%= v.schema %>"><%= k %></a></li>
+         <% }); %>
+    </ul>
+</script>
+
+<script type="text/template" id="endpoint-panel-template">
+    <h3> Schema </h3>
+    <div class="list_info">
+        </h3>Object List Info</h3>
+        <span>The following HTTP methods are allowed to be used on
+        the object list:</span>
+        <ul>
+        <% _.each(schema.allowed_list_http_methods, function(v) {  %>
+            <li><%= v %></li>
+        <% }); %>
+        </ul>
+    </div>
+    <div class="detail_info">
+        </h3>Object Detail Info</h3>
+        <span>The following HTTP methods are allowed to be used on 
+        the object detail:</span>
+        <ul>
+        <% _.each(schema.allowed_detail_http_methods, function(v) { %>
+            <li><%= v %></li>
+        <% }); %>
+        </ul>
+    </div>
+    <div class="fields">
+        <h3>Fields</h3>
+        <% _.each(schema.fields, function(v,k) { %>
+        <div class="field_info">
+            <span class="strong"> <%= k %> </span>
+            <ul>
+                <li>
+                    <span class="label">Field Type:</span>
+                    <span class="data"> <%= v.type %> </span>
+                </li>
+                <li>
+                    <span class="label">Default Value:</span>
+                    <span class="data"> <%= v.default %> </span>
+                </li>
+                <li>
+                    <span class="label"> Can be blank: </span>
+                    <span class="data"> <%= v.blank?"Yes":"No" %> </span>
+                </li>
+                <li>
+                    <span class="label"> Can be null: </span>
+                    <span class="data"> <%= v.nullable?"Yes":"No" %> </span>
+                </li>
+                <li>
+                    <span class="label"> Is Read Only: </span>
+                    <span class="data"> <%= v.readonly?"Yes":"No" %> </span>
+                </li>
+                <li>
+                    <span class="label"> Must be unique: </span>
+                    <span class="data"> <%= v.unique?"Yes":"No" %> </span>
+                </li>
+                <li> <%= v.help_text %> </li>
+            </ul>
+        </div>
+        
+        <% }); %>
+    </div>
+    <% if (typeof schema.actions !== 'undefined') { %>
+    <div class="actions">
+        <h3>Actions</h3>
+        <% _.each(schema.actions, function(v) { %>
+        <div class="action_info">
+            <span class="strong"> <%= v.name %> </span>
+            <span class="action_description"> <%= v.description %> </span>
+            <% if (typeof v.fields !== 'undefined') { %>
+                <span class="strong parameters"> Parameters </span>
+                <ul>
+                    <% _.each(v.fields, function(field,name,fields) { %>
+                        <li>
+                        <span class="fieldname"><%=name%></span>
+                        <% if (!field.required) { %>
+                            <span class="optional"> 
+                                (optional)
+                            </span>
+                        <% } %>
+                        <% if (field.help_text) { %>
+                            <span class="help"><%= field.help_text %></span>
+                        <% } %>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </div>
+        <% }); %>
+    </div>
+    <% } %>
+</script>
+
+
