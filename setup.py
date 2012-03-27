@@ -10,6 +10,7 @@ setup(
     version='0.0.1',
     description='JS Tastypie API Browser for Django.',
     author='Kevin Mooney',
+    license='BSD', 
     author_email='kevin@webcubecms.com',
     url='http://github.com/cuker/django-fbapps/',
     classifiers=[
@@ -17,6 +18,7 @@ setup(
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.5',
         'Programming Language :: Python :: 2.6',
