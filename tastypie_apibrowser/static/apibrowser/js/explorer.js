@@ -1,9 +1,11 @@
 /**
- * Livingstone is an API explorer for Tastypie.
+ * 
+ * This is an API explorer for tastypie
  * 
  * It relies on jQuery and underscore.js
  * 
  */
+
 APIExplorer = null;
 (function () { 
     
@@ -40,12 +42,6 @@ APIExplorer = null;
         
         init: function(config) { 
             _.bindAll(this);
-
-
-            
-            console.log("Init");
-            console.log(Livingstone.Originals);
-
             this.$el = $(config['element']);
             this.options = config;
             var t = this;
@@ -82,7 +78,6 @@ APIExplorer = null;
         },
 
         show_schema: function(api_data) { 
-            console.log(api_data);
             $("#endpoint-panel").html(
                 _.template($('#endpoint-panel-template').html(), 
                 {schema:api_data}));
