@@ -1,6 +1,6 @@
-{% extends 'webcube/base.html' %}
+{% extends 'admin/index.html' %}
 
-{% block extrahead %}
+{% block extrahead %} {{ block.super }}
     <script type="text/javascript" 
             src="{{ STATIC_URL }}apibrowser/js/util/require.js">
     </script>  
@@ -26,5 +26,6 @@
 {% endblock %} 
 
 {% block content %}
-{{ flatpage.content }}
+<div id="api_explorer">
+</div>
 {% endblock %}

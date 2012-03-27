@@ -48,7 +48,7 @@ APIExplorer = null;
 
             this.$el = $(config['element']);
             this.options = config;
-            var t= this;
+            var t = this;
             this.get_application_list(function() {
                 t.render();
                 Livingstone.Originals['endpoint-panel'] = 
@@ -61,27 +61,24 @@ APIExplorer = null;
 
         get_application_list: function(callback) { 
             var t= this;
-            $.ajax(this.options['base_endpoint'], 
-                { 
-                    success: function(response) { 
-                        _.each(response.objects, function(v,k,l) { 
-                            t.Applications[v.application] = v.uri;
-                        });
-                        if (callback !== null && 
-                            typeof callback == 'function') {  
-                            callback();
-                        }
-                    }
+            $.get(this.options['base_endpoint'], function(response) { 
+                _.each(response.objects, function(v,k,l) { 
+                    t.Applications[v.application] = v.uri;
                 });
+                if (callback !== null && 
+                    typeof callback == 'function') {  
+                    callback();
+                }
+            });
         },
 
         get_application_api: function(app_url, callback) { 
             var t = this;
-            $.ajax(app_url, { success: function (response) { 
+            $.get(app_url, function (response) { 
                 if (typeof callback == 'function') { 
                     callback(response);
                 }
-            }});
+            });
         },
 
         show_schema: function(api_data) { 
