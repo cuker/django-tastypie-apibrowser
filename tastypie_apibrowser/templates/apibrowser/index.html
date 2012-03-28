@@ -14,7 +14,7 @@
         });
         require(['{{ STATIC_URL }}apibrowser/js/util/underscore-min.js',
                  '{{ STATIC_URL }}apibrowser/js/explorer.js',
-                 'text!{{ STATIC_URL }}apibrowser/jst/templates.html'], 
+                 'text!/templates'], 
                  function(underscore, explorer, html,css) {
                     $("head").append(css);
                     $("body").append(html);
