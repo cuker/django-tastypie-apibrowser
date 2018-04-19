@@ -2,16 +2,14 @@ try:
     from django.conf.urls import patterns, url
 except ImportError:
     from django.conf.urls.defaults import patterns, url
-from views import staff_member_template
 
+from views import StaffTemplateView
 from django.views.generic import TemplateView
 
-urlpatterns = patterns(
-    '',
-    (
+urlpatterns = patterns('',
+    url(
         r'^$',
-        staff_member_template,
-        {'template': 'apibrowser/index.html'}, 'api-browser'
+        StaffTemplateView.as_view(), name='api-browser'
     ),
     url(
         r'^templates$',
